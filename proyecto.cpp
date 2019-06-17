@@ -62,6 +62,8 @@ main()
 	while(retorno!=1);
 }
 
+// función azar
+// Devuelve un número al azar entre 1 y 20
 int azar()
 {
 	int aleatorio,num,cont1;
