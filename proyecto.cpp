@@ -96,6 +96,8 @@ void imprimir(int v[5])
 			
 	}
 }
+
+//selecciona al azar por rangos de posiciones en un arreglo para ponerlos a pelear a la vez que retorna valores para un funcion posterior 
 int enfrentamiento()
 {
 	int peleador1,peleador2,cont2,puntos,aleatorio,mimo,vic1=0,vic2=0;
