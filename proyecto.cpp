@@ -49,21 +49,12 @@ main()
 		}
 		imprimir(v);
 		enfrentamiento();
-		mimo=enfrentamiento();
-		printf("%i ",mimo);
-		mimo2=enfrentamiento();
-		printf("%i ",mimo2);
-		mimic(mimo,mimo2);
-		
 		printf("si usted quiere dejar de jugar, presione 1\n");
 		scanf("%i",&retorno);
-		
 	}
 	while(retorno!=1);
 }
 
-// función azar
-// Devuelve un número al azar entre 1 y 20
 int azar()
 {
 	int aleatorio,num,cont1;
@@ -96,88 +87,105 @@ void imprimir(int v[5])
 			
 	}
 }
-
-//selecciona al azar por rangos de posiciones en un arreglo para ponerlos a pelear a la vez que retorna valores para un funcion posterior 
 int enfrentamiento()
 {
-	int peleador1,peleador2,cont2,puntos,aleatorio,mimo,vic1=0,vic2=0;
-//	for(cont=0;cont<1;cont=cont+1)
+	int peleador1,peleador2,cont2,puntos,aleatorio,mimo;
+	float vic1=0,vic2=0;
+	for(cont=0,cont2=3;cont<3;cont=cont+1,cont2=cont2+1)
 	{
-		srand(time(NULL));
-		aleatorio=0+rand()%(2+1);printf("%i \n",aleatorio);
-	//	v[cont]=aleatorio;
-	//	Sleep(1000);
-	//	if(cont==0)
-		{
-			peleador1=v[aleatorio];
-		//	p1[0]=aleatorio;
-		//	return(aleatorio);
+			vic1=0;
+			vic2=0;
+			peleador1=v[cont];
 			printf("%i\n",peleador1);
-		}
-	//	if(cont==1)
-		{
-	//		peleador2=v[aleatorio];
-	//		printf("%i \n",peleador2);
-		}
-	}
-//	for(cont=0;cont<2;cont=cont+1)
-	{
-		srand(time(NULL));
-		aleatorio=3+rand()%(5+1);printf("%i \n",aleatorio);
-	//	if(cont==0)
-		{
-	//		peleador1=v[aleatorio];
-	//		printf("%i\n",peleador1);
-		}
-	//	if(cont==1)
-		{
-			peleador2=v[aleatorio];
-		//	p2[0]=aleatorio;
-	//		return(aleatorio);
+			peleador2=v[cont2];
 			printf("%i \n",peleador2);
-		}
-	}
-//	puntos=0;
-//	for(cont=0;cont<3;cont=cont+1)
-	{
-	//	peleador1=v[0];
-	//	for(cont2=3;cont2<6;cont2=cont2+1)
-		{
-			//peleador2=v[3];
-			printf("Round 1-destreza: %s contra %s\n",carta[peleador1].nombre,carta[peleador2].nombre);
+			printf("Round 1-destreza:'%s con %i contra %s con %i\n",carta[peleador1].nombre,carta[peleador1].destreza,carta[peleador2].nombre,carta[peleador2].destreza);
 			puntos=carta[peleador1].destreza-carta[peleador2].destreza;
 			Sleep(1000);
+			if(puntos==0)
+			{
+				printf("duelo empate, punto medio para cada jugador\n");
+				vic1=(float)vic1+0.5;
+				vic2=(float)vic2+0.5;
+				printf("1%f\n2%f",vic1,vic2);
+			}
 			if(puntos>0)
 			{
 				printf("\nganador: %s\n con %i puntos\n",carta[peleador1].nombre,puntos);
 				Sleep(1000);
-				vic1=vic1+1;
+				vic1=(float)vic1+1;	printf("1%f\n2%f",vic1,vic2);
 			}
-			else
+			else if(puntos<0)
 			{
 				puntos=puntos*-1;
 				printf("\nganador: %s\n con %i puntos\n",carta[peleador2].nombre,puntos);
 				Sleep(1000);
-				vic2=vic2+1;
+				vic2=(float)vic2+1;
+				printf("1%f\n2%f",vic1,vic2);
 			}
-			printf("round 2-vitalidad: %s contra %s\n",carta[peleador1].nombre,carta[peleador2].nombre);
+			printf("Round 2-vitalidad:'%s con %i contra %s con %i\n",carta[peleador1].nombre,carta[peleador1].vitalidad,carta[peleador2].nombre,carta[peleador2].vitalidad);
 			puntos=carta[peleador1].vitalidad-carta[peleador2].vitalidad;
 			Sleep(1000);
+			if(puntos==0)
+			{
+				printf("duelo empate, punto medio para cada jugador\n");
+				vic1=(float)vic1+0.5;
+				vic2=(float)vic2+0.5;
+				printf("1%f\n2%f",vic1,vic2);
+			}
 			if(puntos>0)
 			{
 				printf("\nganador: %s\n con %i puntos\n",carta[peleador1].nombre,puntos);
 				Sleep(1000);
-				vic1=vic1+1;
+				vic1=(float)vic1+1;
+				printf("1%f\n2%f",vic1,vic2);
 			}
-			else
+			else if(puntos<0)
 			{
 				puntos=puntos*-1;
 				printf("\nganador: %s\n con %i puntos\n",carta[peleador2].nombre,puntos);
 				Sleep(1000);
-				vic2=vic2+1;
+				vic2=(float)vic2+1;
+				printf("1%f\n2%f",vic1,vic2);
 			}
-			if((vic1==2)||(vic2==2))
+			/*condicion para determinar el ganador con dos rounds ganados o un round y un empate...*/
+			if(((vic1==2)||(vic2==2))||((vic1==1.5)||(vic2==1.5))) 
 			{
+				if((vic1==2)||(vic1==1.5))
+				{
+				printf("ganador de partida: %s",carta[peleador1].nombre);
+				Sleep(1000);
+				}
+				if((vic2==2)||(vic2==1.5))
+				{
+				printf("ganador de partida: %s",carta[peleador2].nombre);
+				Sleep(1000);
+				}
+			}
+			////////////////////////////////////////////////////////////////////////////////////////////////////////
+			/*condiciones para empates  */
+			if((vic1==1.00)&&(vic2==1.00))
+			{
+				printf("Round 3-fuerza:'%s con %i contra %s con %i\n",carta[peleador1].nombre,carta[peleador1].fuerza,carta[peleador2].nombre,carta[peleador2].fuerza);
+				puntos=carta[peleador1].fuerza-carta[peleador2].fuerza;
+				Sleep(1000);
+				if(puntos==0)
+				{
+					printf("duelo empate, sin ganador\n");
+					vic1=(float)vic1+0.5;
+					vic2=(float)vic2+0.5;printf("1%f\n2%f",vic1,vic2);
+				}
+				if(puntos>0)
+				{
+					printf("\nganador: %s\n con %i puntos\n",carta[peleador1].nombre,puntos);
+					vic1=(float)vic1+1;printf("1%f\n2%f",vic1,vic2);
+				}
+				else
+				{
+					puntos=(float)puntos*-1;
+					printf("\nganador: %s\n con %i puntos\n",carta[peleador2].nombre,puntos);
+					vic2=(float)vic2+1;printf("1%f\n2%f",vic1,vic2);
+				}
 				if(vic1==2)
 				{
 				printf("ganador de partida: %s",carta[peleador1].nombre);
@@ -189,108 +197,7 @@ int enfrentamiento()
 				Sleep(1000);
 				}
 			}
-			else
-			{
-				printf("round 3-fuerza: %s contra %s\n",carta[peleador1].nombre,carta[peleador2].nombre);
-				puntos=carta[peleador1].fuerza-carta[peleador2].fuerza;
-				Sleep(1000);
-				if(puntos>0)
-				{
-					printf("\nganador: %s\n con %i puntos\n",carta[peleador1].nombre,puntos);
-				}
-				else
-				{
-					puntos=puntos*-1;
-					printf("\nganador: %s\n con %i puntos\n",carta[peleador2].nombre,puntos);
-				}
-			}
+			/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 }
-}
-int mimic(int mimo,int mimo2)
-{
-	int peleador1,peleador2,cont2,puntos,aleatorio1,vic1=0,vic2=0;
-	aleatorio1=0;
-	do
-	{
-		srand(time(NULL));
-		aleatorio1=0+rand()%(2+1);printf("%i \n",aleatorio1);
-	}
-	while(aleatorio1==mimo);
-	peleador1=v[aleatorio];
-	mimo=v[aleatorio];
-	return(mimo);
-	aleatorio1=0;
-	do
-	{
-		srand(time(NULL));
-		aleatorio1=3+rand()%(5+1);printf("%i \n",aleatorio1);
-	}
-	while(aleatorio1==mimo2);
-	peleador2=v[aleatorio];
-	mimo2=v[aleatorio];
-	return(mimo2);
-	printf("%i \n",peleador2);
-	printf("Round 1-destreza: %s contra %s\n",carta[peleador1].nombre,carta[peleador2].nombre);
-			puntos=carta[peleador1].destreza-carta[peleador2].destreza;
-			Sleep(1000);
-			if(puntos>0)
-			{
-				printf("\nganador: %s\n con %i puntos\n",carta[peleador1].nombre,puntos);
-				Sleep(1000);
-				vic1=vic1+1;
-			}
-			else
-			{
-				puntos=puntos*-1;
-				printf("\nganador: %s\n con %i puntos\n",carta[peleador2].nombre,puntos);
-				Sleep(1000);
-				vic2=vic2+1;
-			}
-			printf("round 2-vitalidad: %s contra %s\n",carta[peleador1].nombre,carta[peleador2].nombre);
-			puntos=carta[peleador1].vitalidad-carta[peleador2].vitalidad;
-			Sleep(1000);
-			if(puntos>0)
-			{
-				printf("\nganador: %s\n con %i puntos\n",carta[peleador1].nombre,puntos);
-				Sleep(1000);
-				vic1=vic1+1;
-			}
-			else
-			{
-				puntos=puntos*-1;
-				printf("\nganador: %s\n con %i puntos\n",carta[peleador2].nombre,puntos);
-				Sleep(1000);
-				vic2=vic2+1;
-			}
-			if((vic1==2)||(vic2==2))
-			{
-				if(vic1==2)
-				{
-				printf("ganador de partida: %s",carta[peleador1].nombre);
-				Sleep(1000);
-				}
-				if(vic2==2)
-				{
-				printf("ganador de partida: %s",carta[peleador2].nombre);
-				Sleep(1000);
-				}
-			}
-			else
-			{
-				printf("round 3-fuerza: %s contra %s\n",carta[peleador1].nombre,carta[peleador2].nombre);
-				puntos=carta[peleador1].fuerza-carta[peleador2].fuerza;
-				Sleep(1000);
-				if(puntos>0)
-				{
-					printf("\nganador: %s\n con %i puntos\n",carta[peleador1].nombre,puntos);
-					Sleep(1000);
-				}
-				else
-				{
-					puntos=puntos*-1;
-					printf("\nganador: %s\n con %i puntos\n",carta[peleador2].nombre,puntos);
-					Sleep(1000);
-				}
-			}
-}
+
