@@ -3,7 +3,7 @@
 #include<conio.h>
 #include<time.h>
 #include<windows.h>
-int cont,retorno,estructura,fila,cartas,c1,c2,c3,c4,c5,c6,aleatorio,v[5],p1[3],p2[3],jugador=0,oponente=0;
+int cont,retorno,aleatorio,v[5],jugador=0,oponente=0;
 struct personajes {
 	char nombre[20];
 	int fuerza;
@@ -62,9 +62,15 @@ void reglas()
 printf("presiona cualquier tecla para comenzar el juego \n");
 getch();
 printf("las reglas de este juego son:\n");
-Sleep(1000);
-printf("-el ganador del torneo sera el que gane dos de tres\n ");
-Sleep(1000);
+Sleep(2000);
+printf("-el ganador del torneo sera el que gane dos de tres de los enfrentamientos entre sus personajes,\ncada enfrentamiento entre personajes tiene tres rounds\n\n ");
+Sleep(2000);
+printf("-el personaje que gane dos de los tres rounds de habilidades sera el ganador del enfrentamiento dandole a su poseedor un punto\n\n");
+Sleep(2000);
+printf("-si un personaje ha ganado dos rounds seguidos, este sera el ganador del enfrentamiento\nsiendo el tercer round un desempate en caso de empate de puntos\n\n");
+Sleep(2000);
+printf("-si en el enfrentamiento las estadisticas de personajes se empatan se le dara a cada personaje medio punto...\nquien tenga un punto y medio sera el ganador del enfrentamiento\n\n");
+Sleep(2000);
 printf("presione cualquier tecla cuando acepte las reglas\n");
 getch();
 }
